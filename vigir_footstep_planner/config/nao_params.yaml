@@ -27,17 +27,17 @@ upper_body:
 ### foot settings #############################################################
 
 foot:
-  size: {x: 0.16, y: 0.088, z: 0.015}
-  separation: 0.095
+  size: {x: 0.15, y: 0.081, z: 0.03}
+  separation: 0.1
 #  origin_shift: {x: 0.02, y: 0.006}
   left: #position of planner foot frame (center of sole) given in robot's "foot" tf frame
     frame_id: /l_sole
     foot_frame:
-      {x: 0.02, y: -0.006, z: 0.00, roll: 0.00, pitch: 0.00, yaw: 0.00}
+      {x: 0.02, y: 0.00, z: 0.00, roll: 0.00, pitch: 0.00, yaw: 0.00}
   right:
     frame_id: \r_sole
     foot_frame:
-      {x: 0.02, y: 0.006, z: 0.00, roll: 0.00, pitch: 0.00, yaw: 0.00}
+      {x: 0.02, y: 0.00, z: 0.00, roll: 0.00, pitch: 0.00, yaw: 0.00}
   #origin_shift: {x: 0.02, y: 0.006, z: 0.00, roll: 0.00, pitch: 0.00, yaw: 0.00}
   # bounding box of allowed footsteps; refined by the more accurate step range
 #  max:
@@ -46,7 +46,7 @@ foot:
 #      step: {x: -0.03, y: 0.095, theta: -0.1}
 
 ### pelvis pose to feet center (on ground) transform ###########################
-pelvis_to_feet_center: {x: 0.0, y: 0.0, z: -0.333}
+pelvis_to_feet_center: {x: 0.0, y: 0.0, z: -0.239}
 ### step range ################################################################
 
 #step_range:

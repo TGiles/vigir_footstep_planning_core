@@ -57,7 +57,7 @@ planner_type: ARAPlanner
 # search until a specific time limit is reached or first solution is found
 search_until_first_solution: False
 
-max_planning_time: 15.0 # default max planning time if not given by request, default 10.0
+max_planning_time: 30.0 # default max planning time if not given by request, default 10.0
 initial_epsilon: 8.0
 decrease_epsilon: 0.2
 
@@ -102,9 +102,9 @@ collision_check:
 ### step set params ########################################################
 foot:
   max:
-    step: {theta: 0.30}
+    step: {theta: 0.35}
     inverse:
-      step: {theta: -0.1}
+      step: {theta: 0.0}
 
 # define polygon for valid step position in view of supporting (=standing) foot
 #step_range:
