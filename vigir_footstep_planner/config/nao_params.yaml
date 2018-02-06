@@ -35,7 +35,7 @@ foot:
     foot_frame:
       {x: 0.02, y: 0.00, z: 0.00, roll: 0.00, pitch: 0.00, yaw: 0.00}
   right:
-    frame_id: \r_sole
+    frame_id: /r_sole
     foot_frame:
       {x: 0.02, y: 0.00, z: 0.00, roll: 0.00, pitch: 0.00, yaw: 0.00}
   #origin_shift: {x: 0.02, y: 0.006, z: 0.00, roll: 0.00, pitch: 0.00, yaw: 0.00}
