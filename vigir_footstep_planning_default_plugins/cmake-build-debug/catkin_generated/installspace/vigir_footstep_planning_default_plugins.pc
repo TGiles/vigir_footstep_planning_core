@@ -1,8 +1,0 @@
-prefix=/usr/local
-
-Name: vigir_footstep_planning_default_plugins
-Description: Description of vigir_footstep_planning_default_plugins
-Version: 0.0.0
-Cflags: -I/usr/local/include
-Libs: -L/usr/local/lib -lvigir_footstep_planning_default_plugins
-Requires: roscpp actionlib_msgs actionlib std_msgs nav_msgs cv_bridge pcl_conversions vigir_generic_params vigir_pluginlib vigir_footstep_planning_msgs vigir_footstep_planning_lib vigir_footstep_planning_plugins vigir_terrain_classifier
