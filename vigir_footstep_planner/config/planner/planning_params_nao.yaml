@@ -26,15 +26,28 @@ name: Nao
 
 # the size of the used hash map (the bigger the better); should be something
 # with 2^X (initially 2^16=65536)
-max_hash_size: 1048576
+# 2^20 = 1048576
+# 2^21 = 2097152
+max_hash_size: 2097152
 
 # default cost to perform one footstep (in addition to ALL other costs, corresponds to 'meters')
 const_step_cost_estimator:
-  step_cost: 0.1
+  # step_cost: 0.05
+  step_cost: 0.01
+
+# boundary_step_cost_estimator:
+#   max_diff_z: 0.02 # // maximum amount for step up/down
+#   long_step_dist: 0.1 # all larger distances are treated as long distance [m]
+#   min_yaw_seperation_enlargement: 0.01 # min yaw before seperation must be increased
+#   yaw_enlarged_min_seperation: 0.1 # min separation needed when foot turned in
+#   cost_roll_abs: 0.01 # cost for roll angle (absolute) [1/rad]
+#   cost_pitch_abs: 0.01 # cost for pitch angle (absolute) [1/rad]
+#   cost_yaw_rel: 0.01 # cost for yaw angle (relative to previous foot) [1/rad]
+#   cost_height_diff_rel: 0.001 # cost for height diff (relative to previous foot) [1/m]
 
 # parameters for heuristics
 max_heuristic_value: 1000.0
-heuristic_scale: 1.5
+heuristic_scale: 1.0
 
 # cost to estimate the difference between the current orientation and the goal
 # orientation; used in the heuristic it can easily overestimate the true path
@@ -46,7 +59,7 @@ max_risk: 1.0
 
 ### planner settings ###########################################################
 
-plugin_set: nao_hot_map
+plugin_set: nao_default
 
 # define the planner of choice provided by the SBPL package
 # - ARAPlanner
@@ -57,15 +70,11 @@ planner_type: ARAPlanner
 # search until a specific time limit is reached or first solution is found
 search_until_first_solution: False
 
-max_planning_time: 30.0 # default max planning time if not given by request, default 10.0
-initial_epsilon: 25.0
-decrease_epsilon: 0.4
+max_planning_time: 20.0 # (IN CPU TIME, NOT WALL) default max planning time if not given by request, default 10.0
+initial_epsilon:  4.0
+decrease_epsilon: 0.2
 
 forward_search: True
-
-# the limit of changed states that decides whether to replan or to start a whole
-# new planning task
-changed_cells_limit: 20000
 
 ### Planning parameterization for a large humanoid, similar to ASIMO or HRP-2 ##
 # used for foot contact support collision check
@@ -93,29 +102,31 @@ collision_check:
   collision_check_accuracy: 2
 
   # discretization of continuous space (cell size in meters)
-  cell_size: 0.01
+  # cell_size: 0.01
+  # cell_size: 0.0125
+  cell_size: 0.02
+  # cell_size: 0.04
 
-  num_angle_bins: 128
+  num_angle_bins: 32
   #num_angle_bins: 64
   #num_angle_bins: 32
 #Using info from nao_params.yaml comments
 ### step set params ########################################################
 foot:
   max:
-    step: {theta: 0.50}
+    step: {theta: 0.30} # Max toe out angle
     inverse:
-      step: {theta: 0.0}
+      step: {theta: -0.10} # max toe in angle
 
 # define polygon for valid step position in view of supporting (=standing) foot
-#step_range:
-#  x: [ 0.00, -0.20, -0.17, -0.13,  0.13,  0.20,  0.38]
-#  y: [ 0.20,  0.25,  0.30,  0.35,  0.35,  0.30,  0.20]
-### step range ################################################################
-
-# more accurate than the bounding box defined by the max/max inverse step
 step_range:
-  x: [0.00, 0.03,  0.07, 0.070,-0.030,-0.03, -0.01]
-  y: [0.15, 0.15,  0.13, 0.095, 0.095, 0.13,  0.15]
+# Still creates same reachability polygon, even with values reversed
+  # x: [0.00, 0.04,  0.07, 0.070 ,-0.025 ,-0.025, -0.01]
+  # y: [0.15, 0.15,  0.13, 0.0875, 0.0875, 0.13,   0.15]
+  x: [-0.01, -0.025, -0.025, 0.070, 0.070, 0.04, 0.00]
+  y: [0.15,   0.13,   0.0875,0.0875,0.13,  0.15, 0.15]
+  # x: [0.00, 0.01, 0.02, 0.03, 0.05, 0.06, 0.07, 0.07,-0.03,-0.03,-0.02,-0.01]
+  # y: [0.15, 0.15, 0.15, 0.14, 0.13, 0.13, 0.12, 0.09, 0.09, 0.13, 0.14, 0.15]
 
 sway_duration: 0.10
 step_duration: 0.60
@@ -127,6 +138,6 @@ dynamics:
     max_acc: 0.0
 
 ### misc ###################################################################
-feedback_rate: 10.0 # [Hz]
+feedback_rate:  10.0 # [Hz]
 threads: 4
 jobs_per_thread: 50

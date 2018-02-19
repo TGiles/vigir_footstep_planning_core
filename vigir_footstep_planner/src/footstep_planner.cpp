@@ -484,7 +484,7 @@ msgs::ErrorStatus FootstepPlanner::planPattern(msgs::StepPlanRequestService::Req
   double step_up_height = std::abs(req.plan_request.pattern_parameters.dz);
   double extra_seperation_factor = req.plan_request.pattern_parameters.extra_seperation ? 1.25 : 1.0;
 
-  ROS_INFO("Start planning stepping (mode: %u, steps: %u)\n", req.plan_request.pattern_parameters.mode, num_steps);
+  ROS_ERROR("Start planning stepping (mode: %u, steps: %u)\n", req.plan_request.pattern_parameters.mode, num_steps);
 
   State previous_state;
   State current_state;

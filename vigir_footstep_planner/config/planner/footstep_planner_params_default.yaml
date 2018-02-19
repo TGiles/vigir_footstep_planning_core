@@ -25,7 +25,6 @@ max_risk: 1.0
 ### planner settings ###########################################################
 
 plugin_set: default
-
 # define the planner of choice provided by the SBPL package
 # - ARAPlanner
 # - ADPlanner
@@ -35,15 +34,11 @@ planner_type: ARAPlanner
 # search until a specific time limit is reached or first solution is found
 search_until_first_solution: False
 
-max_planning_time: 10.0 # default max planning time if not given by request
+max_planning_time: 100.0 # default max planning time if not given by request
 initial_epsilon: 8.0
 decrease_epsilon: 0.2
 
 forward_search: True
-
-# the limit of changed states that decides whether to replan or to start a hole
-# new planning task
-changed_cells_limit: 20000
 
 ### Planning parameterization for a large humanoid, similar to ASIMO or HRP-2 ##
 # used for foot contact support collision check

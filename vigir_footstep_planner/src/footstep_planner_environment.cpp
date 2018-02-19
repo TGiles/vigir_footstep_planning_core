@@ -37,6 +37,7 @@ void FootstepPlannerEnvironment::updateHeuristicValues()
     return;
 
   ROS_INFO("Updating the heuristic values.");
+  // So we don't perform any heuristic update. Odd.
 
 //  if (state_space->ivHeuristicPtr->getHeuristicType() == Heuristic::PATH_STEP_COST_HEURISTIC)
 //  {
@@ -150,11 +151,15 @@ int FootstepPlannerEnvironment::GetFromToHeuristic(int FromStateID, int ToStateI
 
   if ((FromStateID == state_space->ivIdGoalFootLeft && ToStateID == state_space->ivIdGoalFootRight)
       || (FromStateID == state_space->ivIdGoalFootRight && ToStateID == state_space->ivIdGoalFootLeft)){
+        ROS_DEBUG("Goal state found in GetFromToHeuristic");
     return 0;
   }
-
-  return GetFromToHeuristic(*(state_space->ivStateId2State[FromStateID]), *(state_space->ivStateId2State[ToStateID]),
+  int FAKE = GetFromToHeuristic(*(state_space->ivStateId2State[FromStateID]), *(state_space->ivStateId2State[ToStateID]),
                             *(state_space->ivStateId2State[state_space->ivIdPlanningStart]), *(state_space->ivStateId2State[state_space->ivIdPlanningGoal]));
+  // ROS_DEBUG("GetFromToHeuristicValue: %i", FAKE);
+  return FAKE;                          
+  // return GetFromToHeuristic(*(state_space->ivStateId2State[FromStateID]), *(state_space->ivStateId2State[ToStateID]),
+                           // *(state_space->ivStateId2State[state_space->ivIdPlanningStart]), *(state_space->ivStateId2State[state_space->ivIdPlanningGoal]));
 }
 
 int FootstepPlannerEnvironment::GetFromToHeuristic(const PlanningState& from, const PlanningState& to, const PlanningState& start, const PlanningState& goal)
@@ -165,10 +170,18 @@ int FootstepPlannerEnvironment::GetFromToHeuristic(const PlanningState& from, co
 int FootstepPlannerEnvironment::GetGoalHeuristic(int stateID)
 {
   const PlanningState* current = state_space->ivStateId2State[stateID];
-  if (current->getLeg() == LEFT)
-    return GetFromToHeuristic(stateID, state_space->ivIdGoalFootLeft);
-  else
-    return GetFromToHeuristic(stateID, state_space->ivIdGoalFootRight);
+  if (current->getLeg() == LEFT) {
+    int FAKE = GetFromToHeuristic(stateID, state_space->ivIdGoalFootLeft);
+    // ROS_DEBUG("GetGoalHeuristic Cost: %i", FAKE);
+    return FAKE; 
+    // return GetFromToHeuristic(stateID, state_space->ivIdGoalFootLeft);
+  }
+  else {
+    int FAKE = GetFromToHeuristic(stateID, state_space->ivIdGoalFootLeft);
+    // ROS_DEBUG("GetGoalHeuristic Cost: %i", FAKE);
+    return FAKE; 
+    // return GetFromToHeuristic(stateID, state_space->ivIdGoalFootRight);
+  }
   //return GetFromToHeuristic(stateID, state_space->ivIdPlanningGoal);
 }
 
@@ -283,8 +296,10 @@ void FootstepPlannerEnvironment::GetSuccs(int SourceStateID, std::vector<int> *S
   assert(SourceStateID >= 0 && unsigned(SourceStateID) < state_space->ivStateId2State.size());
 
   // make goal states always absorbing
-  if (SourceStateID == state_space->ivIdGoalFootLeft || SourceStateID == state_space->ivIdGoalFootRight)
+  if (SourceStateID == state_space->ivIdGoalFootLeft || SourceStateID == state_space->ivIdGoalFootRight) {
+    ROS_DEBUG("We have reached a goal state! in FootstepPlannerEnvironment::GetSuccs()");
     return;
+  }
 
   const PlanningState* current = state_space->ivStateId2State[SourceStateID];
 
@@ -331,8 +346,10 @@ void FootstepPlannerEnvironment::GetSuccs(int SourceStateID, std::vector<int> *S
   if (state_space->closeToGoal(*current))
   {
     const PlanningState* goal = state_space->ivStateId2State[state_space->ivIdPlanningGoal];
-    if (*(current->getPredState()) == *goal)
+    if (*(current->getPredState()) == *goal){
+      ROS_DEBUG("The goal is reachable! in FootstepPlannerEnvironment::GetSuccs()");
       return;
+    }
 
     if (WorldModel::instance().isAccessible(goal->getState(), current->getState()))
     {
@@ -342,6 +359,7 @@ void FootstepPlannerEnvironment::GetSuccs(int SourceStateID, std::vector<int> *S
         SuccIDV->push_back(goal->getId());
         CostV->push_back(cost);
         stateVisited(*goal);
+        ROS_DEBUG("Should be a small cost to reach goal: %i", cost);
         return;
       }
     }
