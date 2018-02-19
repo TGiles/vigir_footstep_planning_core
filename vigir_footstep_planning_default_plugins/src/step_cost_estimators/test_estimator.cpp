@@ -21,7 +21,7 @@ namespace vigir_footstep_planning
 
         const State& swing_foot_before = swing_foot.getLeg() == LEFT ? left_foot : right_foot;
         // int k [5] ={1, 10, 1, 10, 1};
-        int k [5] = {1, 10, 1, 10, 1};
+        int k [5] = {1, 5, 1, 10, 1};
         double delta_x = swing_foot_before.getX() - swing_foot.getX();
         double delta_y = swing_foot_before.getY() - swing_foot.getY();
         double delta_theta = swing_foot_before.getYaw() - swing_foot.getYaw();
