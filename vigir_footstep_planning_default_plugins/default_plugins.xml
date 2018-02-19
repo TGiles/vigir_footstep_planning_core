@@ -54,6 +54,11 @@
       StepCostEstimator: Estimates travel time for given step
     </description>
   </class>
+  <class type="vigir_footstep_planning::TestEstimator" base_class_type="vigir_footstep_planning::StepCostEstimatorPlugin">
+    <description>
+    StepCostEstimator: A test estimator that works the same as the eulicidean step cost estimator
+    </description>
+  </class>
 
   <!-- HeuristicPlugin -->
   <class type="vigir_footstep_planning::EuclideanHeuristic" base_class_type="vigir_footstep_planning::HeuristicPlugin">

@@ -62,6 +62,12 @@ travel_time_step_cost_estimator:
   base_class_package: vigir_footstep_planning_plugins
   base_class: vigir_footstep_planning::StepCostEstimatorPlugin
 
+test_estimator:
+  type_class_package: vigir_footstep_planning_default_plugins
+  type_class: vigir_footstep_planning::TestEstimator
+  base_class_package: vigir_footstep_planning_plugins
+  base_class: vigir_footstep_planning::StepCostEstimatorPlugin
+
 
 # HeuristicPlugin
 dynamics_heuristic:
