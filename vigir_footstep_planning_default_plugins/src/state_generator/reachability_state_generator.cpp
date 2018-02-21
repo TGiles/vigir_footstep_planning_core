@@ -20,7 +20,7 @@ namespace vigir_footstep_planning
         return false;
 
       bool result = true;
-
+      ros::NodeHandle nh;
       int threads;
       unsigned int jobs_per_thread;
       result &= params.getParam("threads", threads);
@@ -40,6 +40,7 @@ namespace vigir_footstep_planning
 
       int ivMaxStepRangeX, ivMaxStepRangeY, ivMaxStepRangeTheta;
       int ivMaxInvStepRangeX, ivMaxInvStepRangeY, ivMaxInvStepRangeTheta;
+      double foot_separation;
 
       /// Defines the area of performable (discrete) steps.
       std::vector<std::pair<int, int> > step_range;
@@ -71,6 +72,7 @@ namespace vigir_footstep_planning
 
         double max_step_range_theta;
         double max_inverse_step_range_theta;
+        nh.getParam("foot/separation", foot_separation);
         result &= params.getParam("foot/max/step/theta", max_step_range_theta);
         result &= params.getParam("foot/max/inverse/step/theta", max_inverse_step_range_theta);
         ROS_INFO("max step theta param: %f", max_step_range_theta);
@@ -107,18 +109,49 @@ namespace vigir_footstep_planning
 
           if (!in_step_range)
             continue;
-          ROS_ERROR("In step range");
-          ROS_INFO("Current Y iteration: %i", y);
-          ROS_INFO("Current X iteration: %i", x);
+          int k [5] = {1, 10, 1, 10 ,1};
+//          ROS_ERROR("In step range");
+//          ROS_INFO("Current Y iteration: %i", y);
+//          ROS_INFO("Current X iteration: %i", x);
           // generate area of samplings for gpr/map-based planning
           for (int theta = ivMaxInvStepRangeTheta; theta <= ivMaxStepRangeTheta; theta++)
           {
-            Footstep f(cont_val(x, cell_size), cont_val(y, cell_size), angle_cell_2_state(theta, angle_bin_size), 0.0, cell_size, num_angle_bins, hash_table_size);
-            ivContFootstepSet.push_back(f);
             ROS_ERROR("Footstep sample theta: %i", theta);
+            double cost = 0.0;
+            // TODO: Fix delta values
+//          double delta_x = 0.0 - cont_val(x, cell_size);
+//          double delta_y = foot_separation - cont_val(y, cell_size);
+//          double delta_theta = 0.0 - angle_cell_2_state(theta, angle_bin_size);
+            double delta_x = 0.0 + x;
+            double delta_y = y - foot_separation;
+            double delta_theta = 0.0 + theta;
+            double form_a = 1.333 - 33.33 * delta_x;
+            ROS_INFO("form_a val: %f", form_a);
+            if (delta_x > 0) {
+              cost += k[0] * delta_x;
+              ROS_INFO("k[0] calc val: %f", cost);
+            } else {
+              cost += k[1] * std::abs(delta_x);
+              ROS_INFO("k[1] calc val: %f", cost);
+            }
+            double k2 = k[2] * std::abs(delta_y);
+            double k3 = k[3] * std::min(1.0, std::max(0.0, form_a)) * std::abs(delta_y);
+            double k4 = k[4] * std::abs(delta_theta);
+            ROS_INFO("k[2] calc val: %f", k2);
+            ROS_INFO("k[3] calc val: %f", k3);
+            ROS_INFO("k[4] calc val: %f", k4);
+            cost += k2 + k3 + k4;
+//            Footstep f(cont_val(x, cell_size), cont_val(y, cell_size), angle_cell_2_state(theta, angle_bin_size), 0.0, cell_size, num_angle_bins, hash_table_size);
+            Footstep f(cont_val(x, cell_size), cont_val(y, cell_size), angle_cell_2_state(theta, angle_bin_size), cost, cell_size, num_angle_bins, hash_table_size);
+            ivContFootstepSet.push_back(f);
+
             ROS_INFO("Sample continuous (x, cell_size): %f", cont_val(x, cell_size));
             ROS_INFO("Sample continuous (y, cell_size): %f", cont_val(y, cell_size));
             ROS_INFO("Sample continuous (theta, angle_bin_size): %f", angle_cell_2_state(theta, angle_bin_size));
+            ROS_INFO("Delta x: %f", delta_x);
+            ROS_INFO("Delta y: %f", delta_y);
+            ROS_INFO("Delta theta: %f", delta_theta);
+            ROS_WARN("Cost of current footstep: %f", cost);
             // dump to screen
           }
         }
