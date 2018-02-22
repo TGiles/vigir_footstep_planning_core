@@ -5,6 +5,11 @@
       StateGeneratorPlugin: Generates states based on reachability polygon
     </description>
   </class>
+  <class type="vigir_footstep_planning::CustomReachabilityStateGenerator" base_class_type="vigir_footstep_planning::StateGeneratorPlugin">
+    <description>
+      StateGeneratorPlugin: Generates custom NAO states/cost based on reachability polygon
+    </description>
+  </class>
 
   <!-- ReachabilityPlugin -->
   <class type="vigir_footstep_planning::ReachabilityPolygon" base_class_type="vigir_footstep_planning::ReachabilityPlugin">

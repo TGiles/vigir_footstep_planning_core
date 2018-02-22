@@ -43,7 +43,8 @@ plugin_sets:
 
   nao_default:
     # StateGeneratorPlugin
-    reachability_state_generator: none
+    # reachability_state_generator: none
+    custom_reachability_state_generator: none
 
     # StepPlanMsgPlugin
     step_plan_msg_plugin: none
@@ -54,8 +55,8 @@ plugin_sets:
     # StepCostEstimatorPlugins
     const_step_cost_estimator: none
     # euclidean_step_cost_estimator: none
-    test_estimator: none
-    ground_contact_step_cost_estimator: none
+    # test_estimator: none
+    # ground_contact_step_cost_estimator: none
 
     # HeuristicPlugins
     euclidean_heuristic: none

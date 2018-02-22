@@ -33,7 +33,7 @@ max_hash_size: 2097152
 # default cost to perform one footstep (in addition to ALL other costs, corresponds to 'meters')
 const_step_cost_estimator:
   # step_cost: 0.05
-  step_cost: 0.01
+  step_cost: 0.03
 
 # boundary_step_cost_estimator:
 #   max_diff_z: 0.02 # // maximum amount for step up/down
@@ -70,7 +70,7 @@ planner_type: ARAPlanner
 # search until a specific time limit is reached or first solution is found
 search_until_first_solution: False
 
-max_planning_time: 60.0 # (IN CPU TIME, NOT WALL) default max planning time if not given by request, default 10.0
+max_planning_time: 360.0 # (IN CPU TIME, NOT WALL) default max planning time if not given by request, default 10.0
 initial_epsilon:  4.0
 decrease_epsilon: 0.2
 
@@ -116,7 +116,7 @@ foot:
   max:
     step: {theta: 0.30} # Max toe out angle
     inverse:
-      step: {theta: -0.10} # max toe in angle
+      step: {theta: -0.30} # max toe in angle
 
 # define polygon for valid step position in view of supporting (=standing) foot
 step_range:
