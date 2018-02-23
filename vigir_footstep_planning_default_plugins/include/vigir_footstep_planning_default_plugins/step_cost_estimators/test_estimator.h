@@ -17,6 +17,12 @@ namespace vigir_footstep_planning
     protected:
         int num_angle_bins_;
         double cell_size;
+        double foot_separation;
+        double k0;
+        double k1;
+        double k2;
+        double k3;
+        double k4;
     };
 }
 

@@ -35,6 +35,12 @@ const_step_cost_estimator:
   # step_cost: 0.05
   step_cost: 0.03
 
+test_estimator:
+  k0: 1.0
+  k1: 10.0
+  k2: 1.0
+  k3: 10.0
+  k4: 0.03
 # boundary_step_cost_estimator:
 #   max_diff_z: 0.02 # // maximum amount for step up/down
 #   long_step_dist: 0.1 # all larger distances are treated as long distance [m]
@@ -52,7 +58,7 @@ heuristic_scale: 1.0
 # cost to estimate the difference between the current orientation and the goal
 # orientation; used in the heuristic it can easily overestimate the true path
 # cost since this cost is not incorporated in each step
-diff_angle_cost: 0.0
+diff_angle_cost: 0.03
 
 # maximum risk before state will be discarded
 max_risk: 1.0
@@ -70,8 +76,8 @@ planner_type: ARAPlanner
 # search until a specific time limit is reached or first solution is found
 search_until_first_solution: False
 
-max_planning_time: 360.0 # (IN CPU TIME, NOT WALL) default max planning time if not given by request, default 10.0
-initial_epsilon:  4.0
+max_planning_time: 100.0 # (IN CPU TIME, NOT WALL) default max planning time if not given by request, default 10.0
+initial_epsilon:  8.0
 decrease_epsilon: 0.2
 
 forward_search: True
@@ -107,7 +113,7 @@ collision_check:
   cell_size: 0.02
   # cell_size: 0.04
 
-  num_angle_bins: 32
+  num_angle_bins: 64
   #num_angle_bins: 64
   #num_angle_bins: 32
 #Using info from nao_params.yaml comments
@@ -139,5 +145,5 @@ dynamics:
 
 ### misc ###################################################################
 feedback_rate:  10.0 # [Hz]
-threads: 4
+threads: 1
 jobs_per_thread: 50
