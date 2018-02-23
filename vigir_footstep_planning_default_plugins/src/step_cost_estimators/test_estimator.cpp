@@ -23,7 +23,7 @@ namespace vigir_footstep_planning
       params.getParam("test_estimator/k1", k1);
       params.getParam("test_estimator/k2", k2);
       params.getParam("test_estimator/k3", k3);
-      params.getParam("test_estimator/k4", k4);
+      params.getParam("diff_angle_cost", k4);
       // get foot separation
 
     }

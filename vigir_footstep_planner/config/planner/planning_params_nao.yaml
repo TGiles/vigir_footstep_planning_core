@@ -40,7 +40,6 @@ test_estimator:
   k1: 10.0
   k2: 1.0
   k3: 10.0
-  k4: 0.03
 # boundary_step_cost_estimator:
 #   max_diff_z: 0.02 # // maximum amount for step up/down
 #   long_step_dist: 0.1 # all larger distances are treated as long distance [m]
@@ -76,7 +75,7 @@ planner_type: ARAPlanner
 # search until a specific time limit is reached or first solution is found
 search_until_first_solution: False
 
-max_planning_time: 100.0 # (IN CPU TIME, NOT WALL) default max planning time if not given by request, default 10.0
+max_planning_time: 300.0 # (IN CPU TIME, NOT WALL) default max planning time if not given by request, default 10.0
 initial_epsilon:  8.0
 decrease_epsilon: 0.2
 
@@ -145,5 +144,5 @@ dynamics:
 
 ### misc ###################################################################
 feedback_rate:  10.0 # [Hz]
-threads: 1
+threads: 4
 jobs_per_thread: 50
