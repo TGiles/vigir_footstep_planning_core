@@ -35,8 +35,8 @@ namespace vigir_footstep_planning
         risk = 0.0;
         risk_multiplier = 1.0;
 //        double num_angle_bins = num_angle_bins_ * 1.0;
-        double angle_bin_size = 2.0*M_PI / static_cast<double>(num_angle_bins_);
-        int num_angle_bins = num_angle_bins_;
+//        double angle_bin_size = 2.0*M_PI / static_cast<double>(num_angle_bins_);
+//        int num_angle_bins = num_angle_bins_;
         if (swing_foot == left_foot || swing_foot == right_foot)
             return true;
 
