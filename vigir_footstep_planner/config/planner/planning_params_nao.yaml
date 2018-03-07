@@ -18,20 +18,6 @@ test_estimator:
   k1: 10.0
   k2: 1.0
   k3: 10.0
-# test_estimator:
-#   k0: 1.0
-#   k1: 10.0
-#   k2: 1.0
-#   k3: 0.0
-# boundary_step_cost_estimator:
-#   max_diff_z: 0.02 # // maximum amount for step up/down
-#   long_step_dist: 0.1 # all larger distances are treated as long distance [m]
-#   min_yaw_seperation_enlargement: 0.01 # min yaw before seperation must be increased
-#   yaw_enlarged_min_seperation: 0.1 # min separation needed when foot turned in
-#   cost_roll_abs: 0.01 # cost for roll angle (absolute) [1/rad]
-#   cost_pitch_abs: 0.01 # cost for pitch angle (absolute) [1/rad]
-#   cost_yaw_rel: 0.01 # cost for yaw angle (relative to previous foot) [1/rad]
-#   cost_height_diff_rel: 0.001 # cost for height diff (relative to previous foot) [1/m]
 
 # parameters for heuristics
 max_heuristic_value: 1000.0
@@ -59,7 +45,7 @@ planner_type: ARAPlanner
 # search until a specific time limit is reached or first solution is found
 search_until_first_solution: False
 
-max_planning_time: 600.0 # (IN CPU TIME, NOT WALL) default max planning time if not given by request, default 10.0
+max_planning_time: 600.0 # (in CPU time) default max planning time if not given by request, default 10.0
 initial_epsilon:  6.0
 decrease_epsilon: 0.2
 
@@ -97,9 +83,6 @@ collision_check:
   # cell_size: 0.04
 
   num_angle_bins: 64
-  #num_angle_bins: 64
-  #num_angle_bins: 32
-#Using info from nao_params.yaml comments
 ### step set params ########################################################
 foot:
   max:
@@ -109,13 +92,8 @@ foot:
 
 # define polygon for valid step position in view of supporting (=standing) foot
 step_range:
-# Still creates same reachability polygon, even with values reversed
-  # x: [0.00, 0.04,  0.07, 0.070 ,-0.025 ,-0.025, -0.01]
-  # y: [0.15, 0.15,  0.13, 0.0875, 0.0875, 0.13,   0.15]
   x: [-0.01, -0.025, -0.025, 0.070, 0.070, 0.04, 0.00]
   y: [0.15,   0.13,   0.0875,0.0875,0.13,  0.15, 0.15]
-  # x: [0.00, 0.01, 0.02, 0.03, 0.05, 0.06, 0.07, 0.07,-0.03,-0.03,-0.02,-0.01]
-  # y: [0.15, 0.15, 0.15, 0.14, 0.13, 0.13, 0.12, 0.09, 0.09, 0.13, 0.14, 0.15]
 
 sway_duration: 0.10
 step_duration: 0.60
