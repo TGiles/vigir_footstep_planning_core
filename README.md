@@ -6,11 +6,11 @@
 # 2. Running the ViGIR footstep planner
 * The default demo can be launched by:
 <pre>
-roslaunch vigir_footstep_planning footstep_planner_test.launch
+roslaunch vigir_footstep_planner footstep_planner_test.launch
 </pre>
 * The NAO demo can be launched by:
 <pre>
-roslaunch vigir_footstep_planning footstep_planner_test_nao.launch
+roslaunch vigir_footstep_planner footstep_planner_test_nao.launch
 </pre>
 ## All generated step plans are published on vigir_footstep_planning/step_plan
 
