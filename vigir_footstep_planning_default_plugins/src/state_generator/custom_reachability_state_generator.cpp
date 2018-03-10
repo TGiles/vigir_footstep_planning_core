@@ -163,7 +163,7 @@ namespace vigir_footstep_planning
       return result;
     }
 
-    std::list<PlanningState::Ptr> CustomReachabilityStateGenerator::generatePredecessor(const PlanningState& state) const
+    std::list<PlanningState::Ptr> CustomReachabilityStateGenerator::generatePredecessors(const PlanningState& state) const
     {
       std::list<PlanningState::Ptr> result;
 
@@ -172,7 +172,7 @@ namespace vigir_footstep_planning
       return result;
     }
 
-    std::list<PlanningState::Ptr> CustomReachabilityStateGenerator::generateSuccessor(const PlanningState& state) const
+    std::list<PlanningState::Ptr> CustomReachabilityStateGenerator::generateSuccessors(const PlanningState& state) const
     {
       std::list<PlanningState::Ptr> result;
 
