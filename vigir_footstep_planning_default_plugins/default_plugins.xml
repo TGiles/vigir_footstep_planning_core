@@ -46,7 +46,7 @@
   </class>
   <class name="ground_contact_step_cost_estimator" type="vigir_footstep_planning::GroundContactStepCostEstimator" base_class_type="vigir_footstep_planning::StepCostEstimatorPlugin">
     <description>
-      StepCostEstimator: Scales costs for steps which are not hitting the ground perfectly (overhang, needs 3D terrain model) 
+      StepCostEstimator: Scales costs for steps which are not hitting the ground perfectly (overhang, needs 3D terrain model)
     </description>
   </class>
   <class name="map_step_cost_estimator" type="vigir_footstep_planning::MapStepCostEstimator" base_class_type="vigir_footstep_planning::StepCostEstimatorPlugin">
@@ -62,6 +62,11 @@
   <class type="vigir_footstep_planning::TestEstimator" base_class_type="vigir_footstep_planning::StepCostEstimatorPlugin">
     <description>
     StepCostEstimator: A test estimator that works the same as the eulicidean step cost estimator
+    </description>
+  </class>
+  <class name="test_estimator" type="vigir_footstep_planning::TestEstimator" base_class_type="vigir_footstep_planning::StepCostEstimatorPlugin">
+    <description>
+      TestEstimator: Tim's custom version for testing
     </description>
   </class>
 

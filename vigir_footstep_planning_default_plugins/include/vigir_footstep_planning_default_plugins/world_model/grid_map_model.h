@@ -50,6 +50,12 @@ public:
 
   bool loadParams(const vigir_generic_params::ParameterSet& params = vigir_generic_params::ParameterSet()) override;
 
+
+  /**
+   * @brief return reference to the internal distance map used for planning
+   */
+  const vigir_gridmap_2d::GridMap2D& getMap() const { return distance_map; }
+
 protected:
   void mapCallback(const nav_msgs::OccupancyGridConstPtr& occupancy_grid_map_);
 

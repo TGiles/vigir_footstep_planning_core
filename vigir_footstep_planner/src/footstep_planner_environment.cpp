@@ -36,32 +36,21 @@ void FootstepPlannerEnvironment::updateHeuristicValues()
   if (!state_space->ivHeuristicExpired)
     return;
 
+  ROS_INFO("Get planning start and goal states ... ");
+  State start, goal;
+  if (!state_space->getStartState(start)){
+
+    ROS_ERROR(" FootstepPlannerEnvironment::updateHeuristicValues: Invalid starting state for feet!");
+    return;
+  }
+  if (!state_space->getGoalState(goal)){
+
+    ROS_ERROR(" FootstepPlannerEnvironment::updateHeuristicValues: Invalid starting state for feet!");
+    return;
+  }
+
   ROS_INFO("Updating the heuristic values.");
-  // So we don't perform any heuristic update. Odd.
-
-//  if (state_space->ivHeuristicPtr->getHeuristicType() == Heuristic::PATH_STEP_COST_HEURISTIC)
-//  {
-//    boost::shared_ptr<PathCostHeuristic> h =
-//        boost::dynamic_pointer_cast<PathCostHeuristic>(
-//          state_space->ivHeuristicPtr);
-//    MDPConfig MDPCfg;
-//    InitializeMDPCfg(&MDPCfg);
-//    const PlanningState* start = state_space->ivStateId2State[MDPCfg.startstateid];
-//    const PlanningState* goal = state_space->ivStateId2State[MDPCfg.goalstateid];
-
-//    // NOTE: start/goal state are set to left leg
-//    bool success;
-//    if (params.forward_search)
-//      success = h->calculateDistances(*start, *goal);
-//    else
-//      success = h->calculateDistances(*goal, *start);
-//    if (!success)
-//    {
-//      ROS_ERROR("Failed to calculate path cost heuristic.");
-//      exit(1);
-//    }
-//  }
-
+  Heuristic::mutableInstance().updateHeuristicValues(start, goal);
   ROS_DEBUG("Finished updating the heuristic values.");
   state_space->ivHeuristicExpired = false;
 }
@@ -157,7 +146,7 @@ int FootstepPlannerEnvironment::GetFromToHeuristic(int FromStateID, int ToStateI
   int FAKE = GetFromToHeuristic(*(state_space->ivStateId2State[FromStateID]), *(state_space->ivStateId2State[ToStateID]),
                             *(state_space->ivStateId2State[state_space->ivIdPlanningStart]), *(state_space->ivStateId2State[state_space->ivIdPlanningGoal]));
   // ROS_DEBUG("GetFromToHeuristicValue: %i", FAKE);
-  return FAKE;                          
+  return FAKE;
   // return GetFromToHeuristic(*(state_space->ivStateId2State[FromStateID]), *(state_space->ivStateId2State[ToStateID]),
                            // *(state_space->ivStateId2State[state_space->ivIdPlanningStart]), *(state_space->ivStateId2State[state_space->ivIdPlanningGoal]));
 }
@@ -173,13 +162,13 @@ int FootstepPlannerEnvironment::GetGoalHeuristic(int stateID)
   if (current->getLeg() == LEFT) {
     int FAKE = GetFromToHeuristic(stateID, state_space->ivIdGoalFootLeft);
     // ROS_DEBUG("GetGoalHeuristic Cost: %i", FAKE);
-    return FAKE; 
+    return FAKE;
     // return GetFromToHeuristic(stateID, state_space->ivIdGoalFootLeft);
   }
   else {
     int FAKE = GetFromToHeuristic(stateID, state_space->ivIdGoalFootLeft);
     // ROS_DEBUG("GetGoalHeuristic Cost: %i", FAKE);
-    return FAKE; 
+    return FAKE;
     // return GetFromToHeuristic(stateID, state_space->ivIdGoalFootRight);
   }
   //return GetFromToHeuristic(stateID, state_space->ivIdPlanningGoal);

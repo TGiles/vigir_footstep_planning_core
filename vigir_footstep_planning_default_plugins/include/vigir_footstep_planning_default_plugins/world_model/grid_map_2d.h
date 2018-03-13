@@ -53,6 +53,8 @@ class GridMap2D
 public:
   GridMap2D();
   GridMap2D(const nav_msgs::OccupancyGridConstPtr& gridMap);
+  GridMap2D(const GridMap2D& gridMap);
+  
   virtual ~GridMap2D();
 
   void mapToWorld(unsigned int mx, unsigned int my, double& wx, double& wy) const;

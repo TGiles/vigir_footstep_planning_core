@@ -49,6 +49,14 @@ GridMap2D::GridMap2D(const nav_msgs::OccupancyGridConstPtr& gridMap)
   setMap(gridMap);
 }
 
+GridMap2D::GridMap2D(const GridMap2D& gridMap)
+{
+  m_frameId   = gridMap.m_frameId;
+  m_mapInfo   = gridMap.m_mapInfo;
+  setMap(gridMap.m_binaryMap);
+}
+
+
 GridMap2D::~GridMap2D()
 {
 }
@@ -186,5 +194,3 @@ bool GridMap2D::isOccupiedAt(double wx, double wy) const
     return true;
 }
 }
-
-
