@@ -78,7 +78,7 @@ public:
    */
   bool calculateDistances(const State& from, const State& to);
 
-  void updateMap(const vigir_gridmap_2d::GridMap2D& map);
+  bool updateMap();
   /**
    * @brief Initializes heuristic calculations based on change in planning problem
    */
@@ -88,6 +88,8 @@ protected:
   static const int cvObstacleThreshold = 200;
 
   unsigned char** ivpGrid;
+  int ivWidth;
+  int ivHeight;
 
   double ivCellSize;
   int    ivNumAngleBins;
@@ -102,20 +104,11 @@ protected:
   int ivGoalY;
 
   boost::shared_ptr<SBPL2DGridSearch> ivGridSearchPtr;
-  nav_msgs::MapMetaData m_mapInfo;
+  vigir_gridmap_2d::GridMap2D  m_gridMap;
 
   std::string gridMapName;
 
   void resetGrid();
-
-  void worldToMapNoBounds(double wx, double wy, unsigned int& mx, unsigned int& my) const
-  {
-    mx = (int) ((wx - m_mapInfo.origin.position.x) / m_mapInfo.resolution);
-    my = (int) ((wy - m_mapInfo.origin.position.y) / m_mapInfo.resolution);
-    //ROS_INFO("   PathCostHeuristic::worldToMapNoBounds   (%d, %d) (%f, %f)  - (%f, %f) res=%f (%d, %d)",
-    //    mx, my, wx, wy, m_mapInfo.origin.position.x, m_mapInfo.origin.position.y, m_mapInfo.resolution, m_mapInfo.width, m_mapInfo.height);
-  }
-
 
 };
 }

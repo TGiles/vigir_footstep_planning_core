@@ -45,6 +45,9 @@ public:
 
   bool initialize(const vigir_generic_params::ParameterSet& params = vigir_generic_params::ParameterSet()) override;
 
+  /// @brief gets inscribing circle radius
+  double getInscribingRadius();
+
   bool isAccessible(const State& s) const override;
 
 protected:

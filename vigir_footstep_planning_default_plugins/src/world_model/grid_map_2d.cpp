@@ -53,13 +53,23 @@ GridMap2D::GridMap2D(const GridMap2D& gridMap)
 {
   m_frameId   = gridMap.m_frameId;
   m_mapInfo   = gridMap.m_mapInfo;
-  setMap(gridMap.m_binaryMap);
+  m_binaryMap = gridMap.m_binaryMap.clone();
+  m_distMap   = gridMap.m_distMap.clone();
 }
 
 
 GridMap2D::~GridMap2D()
 {
 }
+
+void GridMap2D::copyGridMap2D(GridMap2D& gridMap)
+{
+  gridMap.m_frameId   = this->m_frameId;
+  gridMap.m_mapInfo   = this->m_mapInfo;
+  gridMap.m_binaryMap = this->m_binaryMap.clone();
+  gridMap.m_distMap   = this->m_distMap.clone();
+}
+
 
 void GridMap2D::setMap(const nav_msgs::OccupancyGridConstPtr& gridMap)
 {

@@ -54,13 +54,16 @@ public:
   GridMap2D();
   GridMap2D(const nav_msgs::OccupancyGridConstPtr& gridMap);
   GridMap2D(const GridMap2D& gridMap);
-  
+
   virtual ~GridMap2D();
 
   void mapToWorld(unsigned int mx, unsigned int my, double& wx, double& wy) const;
   bool worldToMap(double wx, double wy, unsigned int& mx, unsigned int& my) const;
   void worldToMapNoBounds(double wx, double wy, unsigned int& mx, unsigned int& my) const;
 
+  //@brief copy current gridmap into reference
+  void copyGridMap2D(GridMap2D& gridMap);
+  
   /// check if a coordinate is covered by the map extent (same as worldToMap)
   bool inMapBounds(double wx, double wy) const;
 

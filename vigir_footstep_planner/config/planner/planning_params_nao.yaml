@@ -10,14 +10,14 @@ max_hash_size: 2097152
 
 # default cost to perform one footstep (in addition to ALL other costs, corresponds to 'meters')
 const_step_cost_estimator:
-  # step_cost: 0.05
-  step_cost: 0.03
+   step_cost: 0.05
+  #step_cost: 0.03
 
 test_estimator:
   k0: 1.0
   k1: 10.0
   k2: 1.0
-  k3: 10.0
+  k3: 0.5
 
 # parameters for heuristics
 max_heuristic_value: 1000.0
@@ -27,7 +27,7 @@ heuristic_scale: 1.0
 # orientation; used in the heuristic it can easily overestimate the true path
 # cost since this cost is not incorporated in each step
 # diff_angle_cost: 0.03
-diff_angle_cost: 0.03
+diff_angle_cost: 0.0003
 
 # maximum risk before state will be discarded
 max_risk: 1.0
@@ -68,7 +68,7 @@ collision_check:
   # - 2 upper body
   # - 4 foot contact support
   #default was 4 for check_mask
-  collision_check_mask: 1
+  collision_check_mask: 3
 
   # footstep collision check accuracy
   # - 0 (just the circumcircle of the foot)

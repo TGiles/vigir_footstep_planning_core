@@ -48,6 +48,9 @@ public:
   bool isAccessible(const State& s) const override;
   bool isAccessible(const State& next, const State& current) const override;
 
+  /// @brief gets inscribing circle radius
+  double getInscribingRadius();
+
 protected:
   // upper body parameters
   geometry_msgs::Vector3 upper_body_size;

@@ -52,9 +52,12 @@ public:
 
 
   /**
-   * @brief return reference to the internal distance map used for planning
+   * @brief get a thread safe copy of map
    */
-  const vigir_gridmap_2d::GridMap2D& getMap() const { return distance_map; }
+  void copyMap(vigir_gridmap_2d::GridMap2D& copy);
+
+  /// @brief gets inscribing circle radius
+  virtual double getInscribingRadius() { return 0.0; }
 
 protected:
   void mapCallback(const nav_msgs::OccupancyGridConstPtr& occupancy_grid_map_);

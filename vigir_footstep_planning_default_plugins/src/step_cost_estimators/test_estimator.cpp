@@ -59,6 +59,8 @@ namespace vigir_footstep_planning
 //        double alt_theta_before = angle_cell_2_state(fake, angle_bin_size);
 //        int fake_after = static_cast<int>(swing_foot.getYaw());
 //        double alt_theta_after = angle_cell_2_state(fake_after, angle_bin_size);
+
+        // Rotate into the stance foot frame
         double nominal_delta_x =  cos(theta_before) * delta_x  + sin(theta_before)* delta_y;
         double nominal_delta_y = -sin(theta_before) * delta_x  + cos(theta_before) * delta_y;
 
@@ -109,7 +111,7 @@ namespace vigir_footstep_planning
         double k2 = k[2] * std::abs(nominal_delta_y);
 //        double k3 = k[3] * std::min(1.0, std::max(0.0, (form_a))) * std::abs(delta_y);
         double k3 = k[3] * std::min(1.0, std::max(0.0, form_a)) * (0.01 + std::abs(nominal_delta_y));
-        double k4 = k[4] * std::abs(delta_theta);
+        double k4 = k[4] * std::abs(delta_theta)* std::abs(delta_theta);
 //        ROS_INFO("k[2] calc val: %f", k2);
 //        ROS_INFO("k[3] calc val: %f", k3);
 //        ROS_INFO("k[4] calc val: %f", k4);
