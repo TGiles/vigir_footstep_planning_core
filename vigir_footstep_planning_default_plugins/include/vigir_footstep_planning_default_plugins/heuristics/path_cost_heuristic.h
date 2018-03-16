@@ -1,5 +1,5 @@
 //=================================================================================================
-// Copyright (c) 2017, Alexander Stumpf, TU Darmstadt
+// Copyright (c) 2018, Alexander Stumpf, TU Darmstadt
 // Based on http://wiki.ros.org/footstep_planner by Johannes Garimort and Armin Hornung
 // All rights reserved.
 
@@ -78,15 +78,21 @@ public:
    */
   bool calculateDistances(const State& from, const State& to);
 
-  void updateMap(vigir_gridmap_2d::GridMap2DPtr map);
+  bool updateMap();
+  /**
+   * @brief Initializes heuristic calculations based on change in planning problem
+   */
+  void updateHeuristicValues(const State& start, const State& goal);
 
 protected:
   static const int cvObstacleThreshold = 200;
 
   unsigned char** ivpGrid;
+  int ivWidth;
+  int ivHeight;
 
   double ivCellSize;
-  int ivNumAngleBins;
+  int    ivNumAngleBins;
   double ivAngleBinSize;
 
   double ivStepCost;
@@ -97,10 +103,13 @@ protected:
   int ivGoalX;
   int ivGoalY;
 
-  vigir_gridmap_2d::GridMap2DPtr ivMapPtr;
   boost::shared_ptr<SBPL2DGridSearch> ivGridSearchPtr;
+  vigir_gridmap_2d::GridMap2D  m_gridMap;
+
+  std::string gridMapName;
 
   void resetGrid();
+
 };
 }
 

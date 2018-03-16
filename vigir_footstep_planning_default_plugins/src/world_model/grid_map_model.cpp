@@ -26,6 +26,12 @@ void GridMapModel::mapCallback(const nav_msgs::OccupancyGridConstPtr& occupancy_
   distance_map.setMap(occupancy_grid_map);
 }
 
+void GridMapModel::copyMap(vigir_gridmap_2d::GridMap2D& copy)
+{
+  boost::unique_lock<boost::shared_mutex> lock(grid_map_shared_mutex_);
+  distance_map.copyGridMap2D(copy);
+}
+
 bool GridMapModel::collision_check(double x, double y, double cos_theta, double sin_theta, double height, double width) const
 {
   double d = distance_map.distanceMapAt(x, y);
