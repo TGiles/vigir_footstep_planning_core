@@ -970,6 +970,7 @@ bool FootstepPlanner::finalizeStepPlan(msgs::StepPlanRequestService::Request& re
 
   resp.final_eps = ivPlannerPtr->get_final_epsilon();
   resp.planning_time = ivPlannerPtr->get_final_eps_planning_time();
+  resp.number_of_states_expanded = ivPlannerEnvironmentPtr->getNumExpandedStates();
 
   if (resp.status.error == msgs::ErrorStatus::NO_ERROR && resp.final_eps > 1.8)
     resp.status += ErrorStatusWarning(msgs::ErrorStatus::WARN_UNKNOWN, "FootstepPlanner", "stepPlanRequestService: Suboptimal plan (eps: " + boost::lexical_cast<std::string>(resp.final_eps) + ")!");

@@ -106,6 +106,7 @@ void FootstepPlannerNode::planningResultActionCallback(const msgs::StepPlanReque
   result.status = resp.status;
   result.final_eps = resp.final_eps;
   result.planning_time = resp.planning_time;
+  result.number_of_states_expanded = resp.number_of_states_expanded;
 
   as->finish(result);
 
