@@ -1003,7 +1003,7 @@ bool FootstepPlanner::finalizeStepPlan(msgs::StepPlanRequestService::Request& re
     ROS_INFO("-------------------------------------");
   }
   ROS_INFO("Total path cost: %f (%f)", total_cost, total_cost-last_cost);
-
+  resp.total_path_cost = total_cost;
   if (ivCheckedFootContactSupportPub.getNumSubscribers() > 0)
   {
     sensor_msgs::PointCloud2 msg;
@@ -1075,6 +1075,9 @@ bool FootstepPlanner::stepPlanRequestService(msgs::StepPlanRequestService::Reque
 {
   // generate step plan based on request
   resp.status += stepPlanRequest(req);
+  // resp.number_of_states_expanded = ivPlannerEnvironmentPtr->getNumExpandedStates();
+  // resp.final_eps = ivPlannerPtr->get_final_epsilon();
+  // resp.planning_time = ivPlannerPtr->get_final_eps_planning_time();
 
   if (hasError(resp.status))
     return true; // return always true so the message is returned
@@ -1130,6 +1133,11 @@ void FootstepPlanner::doPlanning(msgs::StepPlanRequestService::Request& req)
     // finalize plan and generate response
     if (!hasError(resp.status))
       finalizeStepPlan(req, resp, true);
+    else {
+    resp.final_eps = ivPlannerPtr->get_final_epsilon();
+    resp.planning_time = ivPlannerPtr -> get_final_eps_planning_time();
+    resp.number_of_states_expanded = ivPlannerEnvironmentPtr->getNumExpandedStates();
+    }
     result_cb(resp);
   }
 }
