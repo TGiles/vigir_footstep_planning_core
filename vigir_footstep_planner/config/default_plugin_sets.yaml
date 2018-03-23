@@ -86,7 +86,7 @@ plugin_sets:
     #    collision_check_flag: 4 # Foot Contact Support
     #    terrain_model_topic: /terrain_model
 
-  nao_hot_map:
+  ViGIR_A:
     # StateGeneratorPlugin
     reachability_state_generator: none
 
@@ -102,7 +102,7 @@ plugin_sets:
     ground_contact_step_cost_estimator: none
 
     # HeuristicPlugins
-    euclidean_heuristic: hot_map_heuristic
+    euclidean_heuristic: none
     dynamics_heuristic: none
     step_cost_heuristic: none
 
@@ -128,7 +128,7 @@ plugin_sets:
     #     collision_check_flag: 4 # Foot Contact Support
     #     terrain_model_topic: /terrain_model
 
-  nao_step_cost:
+  ViGIR_B:
     # StateGeneratorPlugin
     reachability_state_generator: none
 
@@ -146,10 +146,10 @@ plugin_sets:
 
 
     # HeuristicPlugins
-    euclidean_heuristic: none
+    # euclidean_heuristic: none
     dynamics_heuristic: none
     step_cost_heuristic: none
-    # path_cost_heuristic: none
+    path_cost_heuristic: none
 
     # PostProcessPlugins
     step_dynamics_post_process: none
@@ -173,7 +173,7 @@ plugin_sets:
         collision_check_flag: 4 # Foot Contact Support
         terrain_model_topic: /terrain_model
 
-  nao_euclidean:
+  Custom_A:
     # StateGeneratorPlugin
     reachability_state_generator: none
 
@@ -185,8 +185,9 @@ plugin_sets:
 
     # StepCostEstimatorPlugins
     const_step_cost_estimator: none
-    euclidean_step_cost_estimator: none
-    ground_contact_step_cost_estimator: none
+    test_estimator: none
+    # euclidean_step_cost_estimator: none
+    # ground_contact_step_cost_estimator: none
 
     # HeuristicPlugins
     euclidean_heuristic: none
@@ -214,3 +215,77 @@ plugin_sets:
     #  params:
     #    collision_check_flag: 4 # Foot Contact Support
     #    terrain_model_topic: /terrain_model
+  Custom_B:
+    # StateGeneratorPlugin
+    reachability_state_generator: none
+    # custom_reachability_state_generator: none
+
+    # StepPlanMsgPlugin
+    step_plan_msg_plugin: none
+
+    # ReachabilityPlugins
+    reachability_polygon: none
+
+    # StepCostEstimatorPlugins
+    const_step_cost_estimator: none
+    # euclidean_step_cost_estimator: none
+    test_estimator: none
+    # ground_contact_step_cost_estimator: none
+
+    # HeuristicPlugins
+    # euclidean_heuristic: none
+    # dynamics_heuristic: none
+    # step_cost_heuristic: none
+    path_cost_heuristic: none
+
+    # PostProcessPlugins
+    step_dynamics_post_process: none
+
+    # CollisionCheckPlugins
+    2_upper_body_grid_map_model:
+      import: upper_body_grid_map_model
+      params:
+        collision_check_flag: 2 # Upper Body
+        grid_map_topic: /body_level_grid_map
+    3_foot_grid_map_model:
+      import: foot_grid_map_model
+      params:
+        collision_check_flag: 1 # Foot
+        grid_map_topic: /ground_level_grid_map
+  Custom_C:
+    # StateGeneratorPlugin
+    reachability_state_generator: none
+    # custom_reachability_state_generator: none
+
+    # StepPlanMsgPlugin
+    step_plan_msg_plugin: none
+
+    # ReachabilityPlugins
+    reachability_polygon: none
+
+    # StepCostEstimatorPlugins
+    const_step_cost_estimator: none
+    # euclidean_step_cost_estimator: none
+    test_estimator: none
+    # ground_contact_step_cost_estimator: none
+
+    # HeuristicPlugins
+    # euclidean_heuristic: none
+    # dynamics_heuristic: none
+    step_cost_heuristic: none
+    path_cost_heuristic: none
+
+    # PostProcessPlugins
+    step_dynamics_post_process: none
+
+    # CollisionCheckPlugins
+    2_upper_body_grid_map_model:
+      import: upper_body_grid_map_model
+      params:
+        collision_check_flag: 2 # Upper Body
+        grid_map_topic: /body_level_grid_map
+    3_foot_grid_map_model:
+      import: foot_grid_map_model
+      params:
+        collision_check_flag: 1 # Foot
+        grid_map_topic: /ground_level_grid_map

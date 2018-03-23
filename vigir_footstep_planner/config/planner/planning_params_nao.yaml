@@ -15,9 +15,9 @@ const_step_cost_estimator:
 
 test_estimator:
   k0: 1.0
-  k1: 4.0
+  k1: 2.0
   k2: 1.0
-  k3: 0.5
+  k3: 2.0
 
 # parameters for heuristics
 max_heuristic_value: 1000.0
@@ -27,14 +27,14 @@ heuristic_scale: 1.0
 # orientation; used in the heuristic it can easily overestimate the true path
 # cost since this cost is not incorporated in each step
 # diff_angle_cost: 0.03
-diff_angle_cost: 0.0003
+diff_angle_cost: 0.0
 
 # maximum risk before state will be discarded
 max_risk: 1.0
 
 ### planner settings ###########################################################
 
-plugin_set: nao_default
+plugin_set: Custom_C
 
 # define the planner of choice provided by the SBPL package
 # - ARAPlanner
@@ -45,7 +45,7 @@ planner_type: ARAPlanner
 # search until a specific time limit is reached or first solution is found
 search_until_first_solution: False
 
-max_planning_time: 60.0 # (in CPU time) default max planning time if not given by request, default 10.0
+max_planning_time: 120.0 # (in CPU time) default max planning time if not given by request, default 10.0
 initial_epsilon:  6.0
 decrease_epsilon: 0.2
 
@@ -82,7 +82,7 @@ collision_check:
   cell_size: 0.02
   # cell_size: 0.04
 
-  num_angle_bins: 64
+  num_angle_bins: 32
 ### step set params ########################################################
 foot:
   max:
