@@ -339,7 +339,7 @@ plugin_sets:
     # HeuristicPlugins
     # euclidean_heuristic: none
     # dynamics_heuristic: none
-    # step_cost_heuristic: none
+    step_cost_heuristic: none
     path_cost_heuristic: none
 
     # PostProcessPlugins

@@ -4,7 +4,7 @@
   <arg name="ns" default="vigir/footstep_planning" />
   <group ns="$(arg ns)">
     <!-- run map servers -->
-    <!-- <node name="map_server_1" pkg="map_server" type="map_server" args="$(find vigir_footstep_planner)/maps/sample.yaml">
+    <node name="map_server_1" pkg="map_server" type="map_server" args="$(find vigir_footstep_planner)/maps/sample.yaml">
       <param name="frame_id" value="/world" />
       <remap from="map" to="/body_level_grid_map" />
     </node>
@@ -12,8 +12,8 @@
     <node name="map_server_2" pkg="map_server" type="map_server" args="$(find vigir_footstep_planner)/maps/sample.yaml">
       <param name="frame_id" value="/world" />
       <remap from="map" to="/ground_level_grid_map" />
-    </node> -->
-        <node name="map_server_1" pkg="map_server" type="map_server" args="$(find vigir_footstep_planner)/maps/empty.yaml">
+    </node>
+        <!-- <node name="map_server_1" pkg="map_server" type="map_server" args="$(find vigir_footstep_planner)/maps/empty.yaml">
       <param name="frame_id" value="/world" />
       <remap from="map" to="/body_level_grid_map" />
     </node>
@@ -21,7 +21,7 @@
     <node name="map_server_2" pkg="map_server" type="map_server" args="$(find vigir_footstep_planner)/maps/empty.yaml">
       <param name="frame_id" value="/world" />
       <remap from="map" to="/ground_level_grid_map" />
-    </node>
+    </node> -->
 
     <!-- start up footstep planning system -->
     <include file="$(find vigir_footstep_planning)/launch/footstep_planning_basics.launch" />

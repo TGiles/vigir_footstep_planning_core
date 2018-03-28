@@ -25,6 +25,7 @@ max_risk: 1.0
 ### planner settings ###########################################################
 
 plugin_set: default
+
 # define the planner of choice provided by the SBPL package
 # - ARAPlanner
 # - ADPlanner
@@ -34,7 +35,7 @@ planner_type: ARAPlanner
 # search until a specific time limit is reached or first solution is found
 search_until_first_solution: False
 
-max_planning_time: 100.0 # default max planning time if not given by request
+max_planning_time: 10.0 # default max planning time if not given by request
 initial_epsilon: 8.0
 decrease_epsilon: 0.2
 
@@ -56,8 +57,7 @@ collision_check:
   # - 1 feet
   # - 2 upper body
   # - 4 foot contact support
-  #default was 4 for check_mask
-  collision_check_mask: 1
+  collision_check_mask: 4
 
   # footstep collision check accuracy
   # - 0 (just the circumcircle of the foot)
@@ -84,7 +84,7 @@ step_range:
 
 sway_duration: 0.10
 step_duration: 0.63
-swing_height:  0.10     # Ignored if it is less than 0.1
+swing_height:  0.10
 
 dynamics:
   body: # zero values will disable dynamic constraints

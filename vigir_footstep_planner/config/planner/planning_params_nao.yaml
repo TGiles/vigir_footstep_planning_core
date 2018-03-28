@@ -27,14 +27,14 @@ heuristic_scale: 1.0
 # orientation; used in the heuristic it can easily overestimate the true path
 # cost since this cost is not incorporated in each step
 # diff_angle_cost: 0.03
-diff_angle_cost: 0.0
+diff_angle_cost: 0.0003
 
 # maximum risk before state will be discarded
 max_risk: 1.0
 
 ### planner settings ###########################################################
 
-plugin_set: Custom_C
+plugin_set: Hornung_A
 
 # define the planner of choice provided by the SBPL package
 # - ARAPlanner
@@ -45,7 +45,7 @@ planner_type: ARAPlanner
 # search until a specific time limit is reached or first solution is found
 search_until_first_solution: False
 
-max_planning_time: 120.0 # (in CPU time) default max planning time if not given by request, default 10.0
+max_planning_time: 60.0 # (in CPU time) default max planning time if not given by request, default 10.0
 initial_epsilon:  6.0
 decrease_epsilon: 0.2
 
@@ -82,7 +82,7 @@ collision_check:
   cell_size: 0.02
   # cell_size: 0.04
 
-  num_angle_bins: 32
+  num_angle_bins: 64
 ### step set params ########################################################
 foot:
   max:
