@@ -5,6 +5,12 @@ reachability_state_generator:
   base_class_package: vigir_footstep_planning_plugins
   base_class: vigir_footstep_planning::StateGeneratorPlugin
 
+custom_reachability_state_generator:
+  type_class_package: vigir_footstep_planning_default_plugins
+  type_class: vigir_footstep_planning::CustomReachabilityStateGenerator
+  base_class_package: vigir_footstep_planning_plugins
+  base_class: vigir_footstep_planning::StateGeneratorPlugin
+
 # ReachabilityPlugin
 dynamics_reachability:
   type_class_package: vigir_footstep_planning_default_plugins
@@ -59,6 +65,12 @@ map_step_cost_estimator:
 travel_time_step_cost_estimator:
   type_class_package: vigir_footstep_planning_default_plugins
   type_class: vigir_footstep_planning::TravelTimeStepCostEstimator
+  base_class_package: vigir_footstep_planning_plugins
+  base_class: vigir_footstep_planning::StepCostEstimatorPlugin
+
+test_estimator:
+  type_class_package: vigir_footstep_planning_default_plugins
+  type_class: vigir_footstep_planning::TestEstimator
   base_class_package: vigir_footstep_planning_plugins
   base_class: vigir_footstep_planning::StepCostEstimatorPlugin
 

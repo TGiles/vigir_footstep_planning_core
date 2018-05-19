@@ -34,6 +34,10 @@ double StepCostHeuristic::getHeuristicValue(const State& from, const State& to, 
   double expected_steps_x = std::abs(dstep.getOrigin().x()) * max_step_dist_x_inv_;
   double expected_steps_y = std::abs(dstep.getOrigin().y()) * max_step_dist_y_inv_;
   double expected_steps = std::ceil(std::max(expected_steps_x, expected_steps_y));
+//  ROS_WARN("------------------------------");
+//  ROS_INFO("expected_steps_x: %f", expected_steps_x);
+//  ROS_INFO("expected_steps_y: %f", expected_steps_y);
+//  ROS_INFO("expected_steps: %f", expected_steps);
 
   double diff_angle = 0.0;
   if (diff_angle_cost_ > 0.0)
@@ -43,8 +47,11 @@ double StepCostHeuristic::getHeuristicValue(const State& from, const State& to, 
 //  ROS_INFO("x: %f %f %f", step.getOrigin().x(), ivMaxStepDistX, std::abs(step.getOrigin().x()) / ivMaxStepDistX);
 //  ROS_INFO("y: %f %f %f", step.getOrigin().y(), ivMaxStepDistY, std::abs(step.getOrigin().y()) / ivMaxStepDistY);
 //  ROS_INFO("steps: %f, dist: %f, cost: %f", expected_steps, dist, (dist + expected_steps * ivStepCost + diff_angle * ivDiffAngleCost));
-
-  return expected_steps * step_cost_ + diff_angle * diff_angle_cost_;
+//  if (expected_steps_y > expected_steps_x) {
+//    return std::ceil(expected_steps_x) * step_cost_ + diff_angle * diff_angle_cost_;
+//  } else {
+    return expected_steps * step_cost_ + diff_angle * diff_angle_cost_;
+  // }
 }
 }
 

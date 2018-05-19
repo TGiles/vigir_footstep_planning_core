@@ -51,8 +51,8 @@ double HotMapHeuristic::getHeuristicValue(const State& from, const State& to, co
     hit = hot_map_[StateKey(from, cell_size_, angle_bin_size_)]++;
     total_hit_counter_++;
   }
-
-  return 1000.0 * static_cast<double>(hit)/static_cast<double>(total_hit_counter_);
+  return 1000.0 * static_cast<double>(hit)/static_cast<double>(total_hit_counter_); 
+  // return 100.0 * static_cast<double>(hit)/static_cast<double>(total_hit_counter_);
 }
 
 void HotMapHeuristic::publishHotMap(const ros::TimerEvent& /*publish_timer*/) const

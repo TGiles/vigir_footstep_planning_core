@@ -1,5 +1,5 @@
 //=================================================================================================
-// Copyright (c) 2017, Alexander Stumpf, TU Darmstadt
+// Copyright (c) 2018, Alexander Stumpf, TU Darmstadt
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -44,6 +44,9 @@ public:
   FootGridMapModel(const std::string& name = "foot_grid_map_model");
 
   bool initialize(const vigir_generic_params::ParameterSet& params = vigir_generic_params::ParameterSet()) override;
+
+  /// @brief gets inscribing circle radius
+  double getInscribingRadius();
 
   bool isAccessible(const State& s) const override;
 

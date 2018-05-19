@@ -20,7 +20,7 @@
     <!-- start footstep planner -->
     <!-- launch-prefix="valgrind -\-tool=callgrind -\-log-file=/home/alex/vigir/cachegrind/cachegrind.out" -->
     <node name="footstep_planner" pkg="vigir_footstep_planner" type="footstep_planner_node" respawn="true" output="screen">
-      <remap from="body_level_grid_map" to="ground_level_grid_map" />
+      <remap from="/body_level_grid_map" to="/ground_level_grid_map" />
     </node>
 
     <!-- load plugin sets from YAML file to parameter server -->

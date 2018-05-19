@@ -20,6 +20,12 @@ bool FootGridMapModel::initialize(const vigir_generic_params::ParameterSet& para
   return true;
 }
 
+double FootGridMapModel::getInscribingRadius()
+{
+   return std::min( 0.5*foot_size.x, 0.5*foot_size.y );
+}
+
+
 bool FootGridMapModel::isAccessible(const State& s) const
 {
   boost::shared_lock<boost::shared_mutex> lock(grid_map_shared_mutex_);

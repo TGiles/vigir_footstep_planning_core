@@ -59,19 +59,37 @@ bool ReachabilityPolygon::loadParams(const ParameterSet& params)
   params.getParam("max_step_range/inv_x", max_step_range_inv_x);
   params.getParam("max_step_range/inv_y", max_step_range_inv_y);
   params.getParam("max_step_range/inv_yaw", max_step_range_inv_yaw);
+  ROS_ERROR("START OF REACHABILITY_POLYGON.CPP");
+  ROS_INFO("max_step_range/x: %f", max_step_range_x);
+  ROS_INFO("max_step_range/y: %f", max_step_range_y);
+  ROS_INFO("max_step_range/yaw: %f", max_step_range_yaw);
+  ROS_INFO("max_step_range/inv_x: %f", max_step_range_inv_x);
+  ROS_INFO("max_step_range/inv_y: %f", max_step_range_inv_y);
+  ROS_INFO("max_step_range/inv_yaw: %f", max_step_range_inv_yaw);
 
   params.getParam("max_step_range/width", max_step_range_width_sq);
+
+  ROS_INFO("max_step_range/width: %f", max_step_range_width_sq);
+
   max_step_range_width_sq = max_step_range_width_sq*max_step_range_width_sq;
 
   int max_step_range_x_disc = disc_val(max_step_range_x, cell_size);
   int max_step_range_y_disc = disc_val(max_step_range_y, cell_size);
+  ROS_INFO("max_step_range_x_disc: %i", max_step_range_x_disc);
+  ROS_INFO("max_step_range_y_disc: %i", max_step_range_y_disc);
 
   int max_step_range_inv_x_disc = disc_val(max_step_range_inv_x, cell_size);
   int max_step_range_inv_y_disc = disc_val(max_step_range_inv_y, cell_size);
+  ROS_INFO("max_step_range_inv_x_disc: %i", max_step_range_inv_x_disc);
+  ROS_INFO("max_step_range_inv_y_disc: %i", max_step_range_inv_y_disc);
+  
 
   step_range_size_x = max_step_range_x_disc - max_step_range_inv_x_disc + 1;
   step_range_size_y = max_step_range_y_disc - max_step_range_inv_y_disc + 1;
   step_range_size = step_range_size_x * step_range_size_y;
+  ROS_INFO("step_range_size_x: %lu", step_range_size_x);
+  ROS_INFO("step_range_size_y: %lu", step_range_size_y);
+  ROS_INFO("step_range_size: %lu", step_range_size_x * step_range_size_y);
 
   if (ivpStepRange)
     delete[] ivpStepRange;
@@ -91,7 +109,7 @@ bool ReachabilityPolygon::loadParams(const ParameterSet& params)
     ROS_INFO("%s", msg.c_str());
     msg.clear();
   }
-
+  ROS_ERROR("END OF REACHABILITY_POLYGON.CPP");
   return true;
 }
 

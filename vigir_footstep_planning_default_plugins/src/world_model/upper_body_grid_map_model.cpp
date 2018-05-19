@@ -21,6 +21,12 @@ bool UpperBodyGridMapModel::initialize(const vigir_generic_params::ParameterSet&
   return true;
 }
 
+double UpperBodyGridMapModel::getInscribingRadius()
+{
+   return std::min((0.5*upper_body_size.x + fabs(upper_body_origin_shift.x)),
+                   (0.5*upper_body_size.y + fabs(upper_body_origin_shift.y)));
+}
+
 bool UpperBodyGridMapModel::isAccessible(const State& /*s*/) const
 {
   // We can't make any checks with a single foot pose

@@ -21,7 +21,7 @@ bool EuclideanStepCostEstimator::getCost(const State& left_foot, const State& ri
 
   const State& swing_foot_before = swing_foot.getLeg() == LEFT ? left_foot : right_foot;
   cost = 0.5*euclidean_distance(swing_foot_before.getX(), swing_foot_before.getY(), swing_foot.getX(), swing_foot.getY());
-
+  // cost = euclidean_distance(swing_foot_before.getX(), swing_foot_before.getY(), swing_foot.getX(), swing_foot.getY());
   return true;
 }
 }

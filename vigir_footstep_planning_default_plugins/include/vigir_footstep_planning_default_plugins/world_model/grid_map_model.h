@@ -1,5 +1,5 @@
 //=================================================================================================
-// Copyright (c) 2017, Alexander Stumpf, TU Darmstadt
+// Copyright (c) 2018, Alexander Stumpf, TU Darmstadt
 // Based on http://wiki.ros.org/footstep_planner by Johannes Garimort and Armin Hornung
 // All rights reserved.
 
@@ -49,6 +49,15 @@ public:
   GridMapModel(const std::string& name);
 
   bool loadParams(const vigir_generic_params::ParameterSet& params = vigir_generic_params::ParameterSet()) override;
+
+
+  /**
+   * @brief get a thread safe copy of map
+   */
+  void copyMap(vigir_gridmap_2d::GridMap2D& copy);
+
+  /// @brief gets inscribing circle radius
+  virtual double getInscribingRadius() { return 0.0; }
 
 protected:
   void mapCallback(const nav_msgs::OccupancyGridConstPtr& occupancy_grid_map_);

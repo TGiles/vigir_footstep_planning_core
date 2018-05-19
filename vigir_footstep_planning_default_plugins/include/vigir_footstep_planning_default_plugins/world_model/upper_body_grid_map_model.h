@@ -1,5 +1,5 @@
 //=================================================================================================
-// Copyright (c) 2017, Alexander Stumpf, TU Darmstadt
+// Copyright (c) 2018, Alexander Stumpf, TU Darmstadt
 // All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -47,6 +47,9 @@ public:
 
   bool isAccessible(const State& s) const override;
   bool isAccessible(const State& next, const State& current) const override;
+
+  /// @brief gets inscribing circle radius
+  double getInscribingRadius();
 
 protected:
   // upper body parameters

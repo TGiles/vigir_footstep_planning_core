@@ -1,0 +1,25 @@
+robot_name: Nao
+
+world_frame_id: /world
+
+### upper body settings ########################################################
+upper_body:
+  size: {x: 0.311, y: 0.275, z: 0.574} # [m]
+  origin_shift: {x: 0.0, y: 0.00, z: 0.00} # [m], transformation from center to shifted frame
+
+### foot settings #############################################################
+foot:
+  size: {x: 0.16, y: 0.088, z: 0.015}
+  separation: 0.1
+  origin_shift: {x: 0.02, y: 0.006}
+  left: #position of planner foot frame (center of sole) given in robot's "foot" tf frame
+    frame_id: /l_sole
+    foot_frame:
+      {x: 0.02, y: 0.00, z: 0.00, roll: 0.00, pitch: 0.00, yaw: 0.00}
+  right:
+    frame_id: /r_sole
+    foot_frame:
+      {x: 0.02, y: 0.00, z: 0.00, roll: 0.00, pitch: 0.00, yaw: 0.00}
+
+### pelvis pose to feet center (on ground) transform ###########################
+pelvis_to_feet_center: {x: 0.0, y: 0.0, z: -0.239}

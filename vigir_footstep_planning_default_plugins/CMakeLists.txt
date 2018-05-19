@@ -149,7 +149,8 @@ set(SOURCES
   src/world_model/grid_map_model.cpp
   src/world_model/terrain_model.cpp
   src/world_model/upper_body_grid_map_model.cpp
-)
+        include/vigir_footstep_planning_default_plugins/step_cost_estimators/test_estimator.h src/step_cost_estimators/test_estimator.cpp
+        include/vigir_footstep_planning_default_plugins/state_generator/custom_reachability_state_generator.h src/state_generator/custom_reachability_state_generator.cpp include/vigir_footstep_planning_default_plugins/heuristics/test_heuristic.h src/heuristics/test_heuristic.cpp)
 
 ## Declare a cpp library
 add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS})

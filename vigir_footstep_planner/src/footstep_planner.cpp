@@ -484,7 +484,7 @@ msgs::ErrorStatus FootstepPlanner::planPattern(msgs::StepPlanRequestService::Req
   double step_up_height = std::abs(req.plan_request.pattern_parameters.dz);
   double extra_seperation_factor = req.plan_request.pattern_parameters.extra_seperation ? 1.25 : 1.0;
 
-  ROS_INFO("Start planning stepping (mode: %u, steps: %u)\n", req.plan_request.pattern_parameters.mode, num_steps);
+  ROS_ERROR("Start planning stepping (mode: %u, steps: %u)\n", req.plan_request.pattern_parameters.mode, num_steps);
 
   State previous_state;
   State current_state;
@@ -970,6 +970,7 @@ bool FootstepPlanner::finalizeStepPlan(msgs::StepPlanRequestService::Request& re
 
   resp.final_eps = ivPlannerPtr->get_final_epsilon();
   resp.planning_time = ivPlannerPtr->get_final_eps_planning_time();
+  resp.number_of_states_expanded = ivPlannerEnvironmentPtr->getNumExpandedStates();
 
   if (resp.status.error == msgs::ErrorStatus::NO_ERROR && resp.final_eps > 1.8)
     resp.status += ErrorStatusWarning(msgs::ErrorStatus::WARN_UNKNOWN, "FootstepPlanner", "stepPlanRequestService: Suboptimal plan (eps: " + boost::lexical_cast<std::string>(resp.final_eps) + ")!");
@@ -1002,7 +1003,7 @@ bool FootstepPlanner::finalizeStepPlan(msgs::StepPlanRequestService::Request& re
     ROS_INFO("-------------------------------------");
   }
   ROS_INFO("Total path cost: %f (%f)", total_cost, total_cost-last_cost);
-
+  resp.total_path_cost = total_cost;
   if (ivCheckedFootContactSupportPub.getNumSubscribers() > 0)
   {
     sensor_msgs::PointCloud2 msg;
@@ -1074,6 +1075,9 @@ bool FootstepPlanner::stepPlanRequestService(msgs::StepPlanRequestService::Reque
 {
   // generate step plan based on request
   resp.status += stepPlanRequest(req);
+  // resp.number_of_states_expanded = ivPlannerEnvironmentPtr->getNumExpandedStates();
+  // resp.final_eps = ivPlannerPtr->get_final_epsilon();
+  // resp.planning_time = ivPlannerPtr->get_final_eps_planning_time();
 
   if (hasError(resp.status))
     return true; // return always true so the message is returned
@@ -1129,6 +1133,11 @@ void FootstepPlanner::doPlanning(msgs::StepPlanRequestService::Request& req)
     // finalize plan and generate response
     if (!hasError(resp.status))
       finalizeStepPlan(req, resp, true);
+    else {
+    resp.final_eps = ivPlannerPtr->get_final_epsilon();
+    resp.planning_time = ivPlannerPtr -> get_final_eps_planning_time();
+    resp.number_of_states_expanded = ivPlannerEnvironmentPtr->getNumExpandedStates();
+    }
     result_cb(resp);
   }
 }
